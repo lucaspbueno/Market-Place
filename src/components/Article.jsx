@@ -31,7 +31,7 @@ export default function Article() {
       {
         isLoading ? <Loading /> : (
           <>
-            <div className="flex items-baseline justify-center flex-wrap mt-14">
+            <div className="flex items-baseline justify-center flex-wrap">
               {
                 currentProducts && (
                   currentProducts.map((product, index) => (
@@ -40,7 +40,7 @@ export default function Article() {
                 )
               }
             </div>
-            <div className="join">
+            <div className="join mt-5 mb-10">
               { quantityOfPage && (
                   quantityOfPage.map((el, index) => (
                     <BtnPage

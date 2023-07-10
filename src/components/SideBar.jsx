@@ -24,7 +24,7 @@ export default function SideBar() {
 
 
   if (loading) {
-    return <Loading />;
+    return <div className="w-1/5 flex justify-center items-center"><Loading /></div>;
   }
 
   if (error) {
