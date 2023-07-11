@@ -9,16 +9,39 @@ export const getCategories = 'https://api.mercadolibre.com/sites/MLB/categories'
 
 export async function getSpecificCategory(CATEGORY_ID) {
   const URL_API = `https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}`;
-  const response = await fetch(URL_API);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(URL_API);
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
+    throw new Error('Sem sucesso na requisição');
+  } catch (error) {
+    return error.message;
+  }
 }
+
+/* const URL_API = `https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}&q=${QUERY}`;
+  const response = await fetch(URL_API);
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  } else {
+    console.log
+  } */
 
 export async function getProductsFromCategoryAndQuery(CATEGORY_ID, QUERY) {
   const URL_API = `https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}&q=${QUERY}`;
-  const response = await fetch(URL_API);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(URL_API);
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
+    throw new Error('Sem sucesso na requisição');
+  } catch (error) {
+    return error.message;
+  }
 }
 
 export async function getProductById(PRODUCT_ID) {

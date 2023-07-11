@@ -26,7 +26,7 @@ export default function Login() {
     validationBtn();
   }, [form]);
 
-  const handleClick = () => {
+  const handleClick = async() => {
     history.push("/home");
   };
 

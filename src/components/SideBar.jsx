@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import useFetch from "../hooks/useFetch";
 import CardCategories from "./CardCategories";
 import Loading from "./Loading";
@@ -8,20 +7,7 @@ import { enableLoading, loadProducts, setActiveCategory } from "../redux/actions
 
 export default function SideBar() {
   const { data, loading, error } = useFetch(getCategories);
-  const { categoryActive } = useSelector(state => state.home);
   const dispatch = useDispatch();
-
-  const initialLoading = async () => {
-    dispatch(enableLoading(true));
-    const data = await getSpecificCategory(categoryActive);
-    dispatch(loadProducts(data.results));
-    dispatch(enableLoading(false));
-  };
-
-  useEffect(() => {
-    initialLoading();
-  }, []);
-
 
   if (loading) {
     return <div className="w-1/5 flex justify-center items-center"><Loading /></div>;

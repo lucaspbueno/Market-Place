@@ -11,7 +11,7 @@ const productsReducer = (state = INITIAL_STATE_USER, action) => {
   case ADD_PRODUCTS:
   return {
     ...state,
-    products: [...action.payload],
+    products: action.payload,
   };
   case CATEGORY_ACTIVE:
   return {

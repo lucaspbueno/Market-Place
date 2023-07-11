@@ -1,14 +1,36 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CardProducts from "./CardProducts";
 import Loading from "./Loading";
 import { useEffect, useState } from "react";
 import BtnPage from "./BtnPage";
+import { enableLoading, loadProducts } from "../redux/actions/actionsHome/productsActions";
+import { getSpecificCategory } from "../services/Api";
 export default function Article() {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(8);
-  const { products, isLoading } = useSelector(state => state.home);
+  const { products, isLoading, categoryActive } = useSelector(state => state.home);
   const [currentProducts, setCurrentProducts] = useState([]);
-  const [quantityOfPage, setQuantityOfPages] = useState(null);
+  const [quantityOfPage, setQuantityOfPages] = useState();
+  const dispatch = useDispatch();
+
+  const initialLoading = async () => {
+    dispatch(enableLoading(true));
+    const data = await getSpecificCategory(categoryActive);
+    console.log(data);
+    dispatch(loadProducts(data.results));
+    dispatch(enableLoading(false));
+  };
+
+  useEffect(() => {
+    initialLoading();
+  }, []);
+
+
+  /* useEffect(() => {
+    if (products) {
+      dispatch(enableLoading(false));
+    }
+  }, [products]); */
 
   const calculateQuantityOfPages = () => {
     const totalPages = Math.ceil(products.length / productsPerPage);

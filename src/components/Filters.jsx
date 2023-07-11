@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { getProductsFromCategoryAndQuery } from "../services/Api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { enableLoading, loadProducts, setActiveCategory } from "../redux/actions/actionsHome/productsActions";
 
 export default function Filters() {
   const [stateInput, setStateInput] = useState(false);
   const [textSearch, setTextSearch] = useState('');
+  const { products } = useSelector(state => state.home);
   const dispatch = useDispatch();
 
   const handleChange = async ({ target: { value } }) => {
     dispatch(setActiveCategory(''));
     setStateInput(true);
     setTextSearch(value);
+    console.log(value, textSearch);
   };
 
   const searchProducts = async () => {
@@ -26,11 +28,32 @@ export default function Filters() {
   };
 
   useEffect(() => {
-    searchProducts();
-  }, [textSearch])
+    if (stateInput === true) {
+      searchProducts();
+    }
+  }, [textSearch]);
+
+  const orderProducts = ({ target: { value } }) => {
+    if (value === 'maior') {
+      const sortProductsByHighestPrice = products.sort((a, b) => b.price - a.price);
+      dispatch(loadProducts([...sortProductsByHighestPrice]));
+    } else {
+      const orderProductsByLowestPrice = products.sort((a, b) => a.price - b.price);
+      dispatch(loadProducts([...orderProductsByLowestPrice]));
+    }
+  };
 
   return (
-    <div className="flex flex-col items-end bg-black h-16 p-2">
+    <div className="flex justify-end bg-black h-16 p-2">
+      <p className="self-center mr-2">Ordernar por</p>
+      <select
+        className="select select-bordered w-full max-w-xs mr-5"
+        onChange={ orderProducts }
+      >
+        <option disabled selected>Selecione o filtro</option>
+        <option value="menor">Menor preço</option>
+        <option value="maior">Maior preço</option>
+      </select>
       <div className="flex bg-base-100 w-1/5">
         <input
           type="text"
