@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <div className="navbar bg-base-100 shadow-xl fixed top-0 z-0">
+    <div className="navbar bg-[#0e142f]  shadow-xl fixed top-0 z-0">
       <div className="flex-1">
         <a className="btn btn-ghost normal-case text-xl">Market Place</a>
       </div>

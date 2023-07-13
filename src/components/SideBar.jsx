@@ -10,7 +10,7 @@ export default function SideBar() {
   const dispatch = useDispatch();
 
   if (loading) {
-    return <div className="w-1/5 flex justify-center items-center"><Loading /></div>;
+    return <div className="h-full flex justify-center items-center"><Loading /></div>;
   }
 
   if (error) {
@@ -26,7 +26,7 @@ export default function SideBar() {
   };
 
   return (
-    <aside className="bg-[#0e142f] w-1/5 h-[850px] overflow-y-scroll">
+    <aside className="h-screen w-full bg-[#0e142f] p-10 overflow-y-scroll">
       <ul>
         { data &&
           data.map(({ name, id }) => (

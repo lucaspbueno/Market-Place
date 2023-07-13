@@ -48,36 +48,32 @@ export default function Article() {
     }
   }, [currentPage, products]);
 
+  if (isLoading) return <Loading />;
+
   return (
-    <article className="w-full h-[850px] flex flex-col items-center justify-center">
-      {
-        isLoading ? <Loading /> : (
-          <>
-            <div className="flex items-baseline justify-center flex-wrap">
-              {
-                currentProducts && (
-                  currentProducts.map((product, index) => (
-                    <CardProducts key={ index }  product={ product } />
-                  ))
-                )
-              }
-            </div>
-            <div className="join mt-5 mb-10">
-              { quantityOfPage && (
-                  quantityOfPage.map((el, index) => (
-                    <BtnPage
-                      key={ index }
-                      num={ index + 1 }
-                      setCurrentPage={ setCurrentPage }
-                      currentPage={ currentPage }
-                    />
-                  ))
-                )
-              }
-            </div>
-          </>
-        )
-      }
+    <article className="w-full flex flex-col items-center justify-center bg-black">
+      <div className="flex items-baseline justify-center flex-wrap bg-white">
+        {
+          currentProducts && (
+            currentProducts.map((product, index) => (
+              <CardProducts key={ index }  product={ product } />
+            ))
+          )
+        }
+      </div>
+      <div className="join mt-5 mb-10">
+        { quantityOfPage && (
+            quantityOfPage.map((el, index) => (
+              <BtnPage
+                key={ index }
+                num={ index + 1 }
+                setCurrentPage={ setCurrentPage }
+                currentPage={ currentPage }
+              />
+            ))
+          )
+        }
+      </div>
     </article>
   )
 }

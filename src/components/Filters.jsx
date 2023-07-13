@@ -44,7 +44,7 @@ export default function Filters() {
   };
 
   return (
-    <div className="flex justify-end bg-black h-16 p-2">
+    <div className="flex justify-end bg-base-100 h-16 p-2">
       <p className="self-center mr-2">Ordernar por</p>
       <select
         className="select select-bordered w-full max-w-xs mr-5"

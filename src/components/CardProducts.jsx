@@ -2,8 +2,8 @@
 export default function CardProducts({ product: { title, condition, thumbnail, price, shipping, attributes }}) {
     const maxLength = 25;
   return (
-    <div className="flex flex-col items-center rounded-3xl w-80 shadow-xl m-2 pt-14 bg-base-300">
-      <figure><img src={ thumbnail } alt="Shoes" /></figure>
+    <div className="flex flex-col items-center rounded-3xl w-80 shadow-xl m-2 pt-10 bg-base-300">
+      <figure><img src={ thumbnail } alt={ title } /></figure>
       <div className="card-body">
         <h2 className="card-title">
           {
