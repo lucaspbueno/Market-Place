@@ -4,4 +4,4 @@ WORKDIR /app
 # RUN npm ci
 # COPY . .
 # EXPOSE 5555
-# CMD ["vite"]
+# CMD [""]

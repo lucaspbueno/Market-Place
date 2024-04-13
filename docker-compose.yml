@@ -5,30 +5,28 @@ services:
     container_name: db
     image: mysql:8.0.29
 
-  back-end:
+  backend:
     container_name: api
     build:
       context: ./backend
-      dockerfile: Dockerfile
     ports:
-      -3001:3001
+      - 3001:3001
     volumes:
-      -./backend:/app
+      - ./backend/src:/app/src
     tty: true
     stdin_open: true
     command: bash
     depends_on:
       - database
 
-  front-end:
+  frontend:
     container_name: app
     build: 
       context: ./frontend
-      dockerfile: Dockerfile
     ports:
-      -5555:5555
+      - 5555:5555
     volumes:
-      -./frontend:/app
+      - ./frontend/src:/app/src
     tty: true
     stdin_open: true
     command: bash
