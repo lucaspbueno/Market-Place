@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  database:
+    container_name: db
+    image: mysql:8.0.29
+
+  back-end:
+    container_name: api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      -3001:3001
+    volumes:
+      -./backend:/app/backend
+    depends_on:
+      - database
+
+  front-end:
+    container_name: app
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      -5555:5555
+    volumes:
+      -./backend:/app/backend
+    depends_on:
+      - backend
